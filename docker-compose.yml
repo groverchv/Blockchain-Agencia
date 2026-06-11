@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  node-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blockchain-agencia:latest
+    container_name: blockchain-node-1
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - DATABASE_FILE=/usr/src/app/data/blockchain-node-1.db
+      - BLOCKCHAIN_DIFFICULTY=2
+    volumes:
+      - node1-data:/usr/src/app/data
+    networks:
+      - blockchain-net
+
+  node-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blockchain-agencia:latest
+    container_name: blockchain-node-2
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+      - DATABASE_FILE=/usr/src/app/data/blockchain-node-2.db
+      - BLOCKCHAIN_DIFFICULTY=2
+    volumes:
+      - node2-data:/usr/src/app/data
+    networks:
+      - blockchain-net
+
+  node-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blockchain-agencia:latest
+    container_name: blockchain-node-3
+    ports:
+      - "3003:3000"
+    environment:
+      - PORT=3000
+      - DATABASE_FILE=/usr/src/app/data/blockchain-node-3.db
+      - BLOCKCHAIN_DIFFICULTY=2
+    volumes:
+      - node3-data:/usr/src/app/data
+    networks:
+      - blockchain-net
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+
+networks:
+  blockchain-net:
+    driver: bridge

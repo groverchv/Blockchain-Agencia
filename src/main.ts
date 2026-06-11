@@ -7,6 +7,9 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS for frontend and mobile access
+  app.enableCors();
+
   // Enable global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({

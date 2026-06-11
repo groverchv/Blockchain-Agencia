@@ -29,7 +29,7 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT', 3000);
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : configService.get<number>('PORT', 3000);
 
   await app.listen(port);
   console.log(`Blockchain Node is running on: http://localhost:${port}`);
